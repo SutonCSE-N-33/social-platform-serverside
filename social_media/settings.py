@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 import dj_database_url
 from pathlib import Path
 
@@ -27,7 +27,9 @@ SECRET_KEY = 'django-insecure-f1z^&15$8zroeq=5c5+h!kx4@6+9(jks5j&bp#ok(x-s326(q@
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -117,13 +119,19 @@ WSGI_APPLICATION = 'social_media.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     "default": dj_database_url.config(
         default="postgres://nazrul:GXc9xm7e5ZvzTRd2tDtBjTMY7ta3Cycc@dpg-clf0jrnjc5ks7393bqng-a.oregon-postgres.render.com/social_media_fs7u",
         conn_max_age=600,
     )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
