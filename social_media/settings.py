@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'comment',
     'react',
     'reply',
+    'notification',
     "crispy_forms",
     "crispy_tailwind",
     'rest_framework',

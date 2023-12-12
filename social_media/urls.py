@@ -16,6 +16,7 @@ from post.views import PostViewSet
 from comment.views import CommentViewSet
 from reply.views import ReplyViewSet
 from react.views import ReactViewSet
+from notification.views import NotificationViewSet, CountNotificationViewSet
 
 
 router = routers.DefaultRouter()
@@ -23,6 +24,8 @@ router.register(r"post",PostViewSet)
 router.register(r'comment',CommentViewSet)
 router.register(r'react',ReactViewSet)
 router.register(r'reply',ReplyViewSet)
+router.register(r'notification', NotificationViewSet)
+router.register(r'count_Notification', CountNotificationViewSet)
 
 
 urlpatterns = [
