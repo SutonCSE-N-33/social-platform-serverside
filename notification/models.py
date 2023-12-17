@@ -15,6 +15,7 @@ class Notification(models.Model):
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE, blank=True, null=True)
     reply = models.ForeignKey(Reply, on_delete=models.CASCADE, blank=True, null=True)
     react = models.ForeignKey(React, on_delete=models.CASCADE, blank=True, null=True)
+    background = models.BooleanField(default=True)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     
@@ -23,6 +24,7 @@ class Notification(models.Model):
         return self.user_name
 
 class CountNotification(models.Model):
+    id = models.AutoField(primary_key=True)
     count = models.IntegerField()
     post_author = models.IntegerField(null=True)
     
