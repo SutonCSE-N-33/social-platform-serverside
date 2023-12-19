@@ -12,7 +12,7 @@ from accounts.views import (
     LogoutView,
     DeleteUserView
 )
-from post.views import PostViewSet
+from post.views import PostViewSet, PostDetailViewSet
 from comment.views import CommentViewSet
 from reply.views import ReplyViewSet
 from react.views import ReactViewSet
@@ -21,6 +21,7 @@ from notification.views import NotificationViewSet, CountNotificationViewSet
 
 router = routers.DefaultRouter()
 router.register(r"post",PostViewSet)
+router.register(r"postDetails",PostDetailViewSet, basename="id")
 router.register(r'comment',CommentViewSet)
 router.register(r'react',ReactViewSet)
 router.register(r'reply',ReplyViewSet)
