@@ -51,7 +51,6 @@ class UserProfileSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         instance.gender = validated_data.get("gender", instance.gender)
         instance.address = validated_data.get("area", instance.area)
-        instance.profile_avatar = validated_data.get("profile_avatar", instance.profile_avatar)
         instance.date_of_birth = validated_data.get(
             "date_of_birth", instance.date_of_birth
         )
