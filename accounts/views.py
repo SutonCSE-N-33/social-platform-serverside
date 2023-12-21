@@ -32,6 +32,7 @@ class LoginAPIView(APIView):
 
             if user is not None:
                 login(request, user)
+                user_profile = UserProfile.objects.get(user=user)
                 token, created = Token.objects.get_or_create(user=user)
                 return Response(
                     {
@@ -39,6 +40,7 @@ class LoginAPIView(APIView):
                         "user_id": user.id,
                         "first_name": user.first_name,
                         "last_name": user.last_name,
+                        "profile_id": user_profile.id,
                     },
                     status=status.HTTP_200_OK,
                 )
@@ -77,6 +79,7 @@ class RegistrationAPIView(APIView):
         serializer = RegistrationSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
+            UserProfile.objects.create(user=user)
             return Response(
                 {"message": "User registered successfully"},
                 status=status.HTTP_201_CREATED,
@@ -86,14 +89,15 @@ class RegistrationAPIView(APIView):
 
 
 class UserProfileViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsOwnerOnly]
-    serializer_class = UserProfileSerializer
+     permission_classes = [IsAuthenticated, IsOwnerOnly]
+     serializer_class = UserProfileSerializer
 
-    def get_queryset(self):
-        if self.request.user.is_authenticated:
+     def get_queryset(self):
+          if self.request.user.is_authenticated:
             return UserProfile.objects.filter(user=self.request.user)
-        else:
+          else:
             return UserProfile.objects.none()
+       
         
 
 class DeleteUserView(DestroyAPIView):

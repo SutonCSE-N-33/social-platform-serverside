@@ -10,7 +10,8 @@ from accounts.views import (
     LoginAPIView,
     RegistrationAPIView,
     LogoutView,
-    DeleteUserView
+    DeleteUserView,
+    UserProfileViewSet
 )
 from post.views import PostViewSet, PostDetailViewSet
 from comment.views import CommentViewSet
@@ -27,6 +28,7 @@ router.register(r'react',ReactViewSet)
 router.register(r'reply',ReplyViewSet)
 router.register(r'notification', NotificationViewSet)
 router.register(r'count_Notification', CountNotificationViewSet)
+router.register(r"users", UserProfileViewSet, basename="users")
 
 
 urlpatterns = [
