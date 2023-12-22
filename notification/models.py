@@ -9,6 +9,7 @@ from comment.models import Comment
 class Notification(models.Model):
     id = models.AutoField(primary_key=True)
     user_name = models.CharField( max_length=50) 
+    profile_avatar = models.URLField(null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     post = models.ForeignKey(Post, on_delete=models.CASCADE) 
     post_author = models.IntegerField(null=True)
